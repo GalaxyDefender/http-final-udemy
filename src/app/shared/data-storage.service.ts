@@ -14,19 +14,20 @@ export class DataStorageService {
 
   storeRecipes() {
     const token = this.authService.getToken();
-    return this.http.put('https://ng-recipe-book-fd02a.firebaseio.com/recipes.json?auth=' + token, this.recipeService.getRecipes());
+    return this.http.put('https://ng-recipe-book-bb6d1.firebaseio.com/recipes.json?auth=' + token, this.recipeService.getRecipes());
   }
 
   getRecipes() {
 //      let tk = '';
     const token = this.authService.getToken();
 
-    this.http.get('https://ng-recipe-book-fd02a.firebaseio.com/recipes.json?auth=' + token)
+    this.http.get('https://ng-recipe-book-bb6d1.firebaseio.com/recipes.json?auth=' + token)
       .map(
         (response: Response) => {
           const recipes: Recipe[] = response.json();
           for (let recipe of recipes) {
             if (!recipe['ingredients']) {
+              console.log(recipe);
               recipe['ingredients'] = [];
             }
           }
